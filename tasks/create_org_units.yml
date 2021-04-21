@@ -1,0 +1,25 @@
+---
+
+- name: Create Base Level OUs
+  win_dsc:
+    resource_name: ADOrganizationalUnit
+    name: "{{ item.name }}"
+    path:  "{{ item.path }}"
+  loop: "{{ base_lvl_organizational_units }}"
+
+- name: Create Group Policy (Department) OUs
+  win_dsc:
+    resource_name: ADOrganizationalUnit
+    name: "{{ item.name }}"
+    path:  "{{ item.path }}"
+  loop: "{{ department_lvl_organizational_units }}"
+         
+- name: Create sub level OUs (Users, Computers, optional others)
+  win_dsc:
+    resource_name: ADOrganizationalUnit
+    name: "{{ item.0.name }}"
+    path:  "ou={{ item.1.name }}, {{ item.1.path }}"
+  with_nested: 
+    - "{{ sub_lvl_organisational_units }}"
+    - "{{ department_lvl_organizational_units }}"
+  

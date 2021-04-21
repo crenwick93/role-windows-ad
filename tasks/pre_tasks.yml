@@ -1,0 +1,20 @@
+---
+# This is required for Windows Server 2016
+- name: Set strong cryptography on 64 bit .Net Framework
+  win_shell: "Set-ItemProperty -Path 'HKLM:\\SOFTWARE\\Wow6432Node\\Microsoft\\.NetFramework\\v4.0.30319' -Name 'SchUseStrongCrypto' -Value '1' -Type DWord"
+
+- name: Set strong cryptography on 32 bit .Net Framework
+  win_shell: "Set-ItemProperty -Path 'HKLM:\\SOFTWARE\\Microsoft\\.NetFramework\\v4.0.30319' -Name 'SchUseStrongCrypto' -Value '1' -Type DWord"
+
+- name: "Install Package: NuGet"
+  win_shell: "install-packageprovider -name nuget -force"
+  
+- name: "Install XactiveDirectory"
+  win_psmodule:
+    name: ActiveDirectoryDSC
+    state: present
+
+- name: "Install XactiveDirectory"
+  win_psmodule:
+    name: ActiveDirectoryDSC
+    state: present

@@ -1,0 +1,14 @@
+---
+# tasks file for role-windows-ad
+- name: Install Active Directory Domain Services
+  include_tasks: pre_tasks.yml
+
+- name: Install Active Directory Domain Services
+  include_tasks: install_ad.yml
+  tags:
+    - install_ad
+
+- name: Create Organisational Units
+  include_tasks: create_org_units.yml
+  tags:
+    - configure_ou

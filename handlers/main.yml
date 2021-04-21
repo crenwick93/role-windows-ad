@@ -1,0 +1,5 @@
+---
+# handlers file for role-windows-ad
+- name: Reboot_If_Required
+  win_reboot:
+  when: domain_install.reboot_required
